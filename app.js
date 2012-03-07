@@ -26,7 +26,11 @@ app.post('/login', function(req, res) {
   };
 
   request.post(params, function(error, resp, body) {
-    req.session.email = JSON.parse(body).email;
+    try {
+      req.session.email = JSON.parse(body).email;
+    } catch(e) {
+      console.error('JSON failed to parse');
+    }
     res.redirect('back');
   });
 });
