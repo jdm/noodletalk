@@ -8,6 +8,11 @@ html
     script(src='/javascripts/main.js')
 
   body!= body
-    a(href='#', id='login') Log in with BrowserID
-    form(method='post', action='/login')
-      input(type='hidden', name='bid_assertion', value='1')
+    p= session.email
+    if session.email
+      a(href='/logout') Log out
+    else
+      bal
+      a(href='#', id='login') Log in with BrowserID
+      form(method='post', action='/login')
+        input(type='hidden', name='bid_assertion', value='1')
