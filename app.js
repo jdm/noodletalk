@@ -1,7 +1,7 @@
-var https = require('https');
 var querystring = require('querystring');
-var routes = require('./routes');
+var request = require('request');
 
+var routes = require('./routes');
 var settings = require('./settings');
 
 var app = settings.app;
@@ -13,36 +13,22 @@ app.get('/', routes.index);
 
 // Browser ID login
 app.post('/login', function(req, res) {
-  var bid_response = '';
-  var post_data = querystring.stringify({
-    'assertion': req.body.bid_assertion,
-    'audience' : siteUrl,
-  });
-
-  var post_options = {
-    host: 'browserid.org',
-    path: '/verify',
-    port: 443,
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Content-Length': post_data.length
-    }
+  var authUrl = 'https://browserid.org/verify';
+  var qs = {
+    assertion: req.body.bid_assertion,
+    audience: siteUrl
   };
 
-  var post_req = https.request(post_options, function(resp) {
-    var body = '';
-    resp.setEncoding('utf-8');
-    resp.on('data', function(data) { body += data; });
-    resp.on('end', function() {
-      var bid_response = JSON.parse(body);
-      req.session.email = bid_response.email;
-      res.redirect('back');
-    });
-  });
+  var params = {
+    url: authUrl,
+    form: true,
+    qs: qs
+  };
 
-  post_req.write(post_data);
-  post_req.end();
+  request.post(params, function(error, resp, body) {
+    req.session.email = JSON.parse(body).email;
+    res.redirect('back');
+  });
 });
 
 // Logout
