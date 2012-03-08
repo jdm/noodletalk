@@ -4,8 +4,11 @@
  */
 
 var express = require('express');
+var RedisStore = require('connect-redis')(express);
 
-var app = module.exports = express.createServer();
+var configurations = module.exports;
+var app = express.createServer();
+var options = { domain: 'localhost:3000' };
 
 // Configuration
 
@@ -16,7 +19,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.static(__dirname + '/public'));
   app.use(express.cookieParser());
-  app.use(express.session({ secret: 'secret' }));
+  app.use(express.session({ secret: 'secret', store: new RedisStore }));
   app.use(app.router);
 });
 
@@ -28,4 +31,13 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-return app;
+app.dynamicHelpers({
+  session: function (req, res) {
+    return req.session;
+  }
+});
+
+configurations.app = app;
+configurations.options = options;
+
+return configurations;
