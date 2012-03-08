@@ -7,12 +7,12 @@ html
     script(src='https://browserid.org/include.js', type='text/javascript')
     script(src='/javascripts/main.js')
 
-  body!= body
-    p= session.email
-    if session.email
-      a(href='/logout') Log out
-    else
-      bal
-      a(href='#', id='login') Log in with BrowserID
-      form(method='post', action='/login')
-        input(type='hidden', name='bid_assertion', value='1')
+  body
+    #header
+      if session.email
+        a(href='/logout') Log out
+      else
+        a(href='#', id='login') Log in with BrowserID
+        form(method='post', action='/login')
+          input(type='hidden', name='bid_assertion', value='1')
+    != body

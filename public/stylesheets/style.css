@@ -63,3 +63,17 @@ h1 {
 a {
     color: #00B7FF;
 }
+
+#header, #message {
+    clear: both;
+    float: left;
+    margin: 5px;
+    width: 100%;
+}
+
+ol {
+    clear: both;
+    display: block;
+    float: left;
+    width: 100%;
+}

@@ -1,2 +1,9 @@
 h1 Noodle Talk
-p There's nothing here yet.
+
+#message
+  if session.email
+    form(method='post', action='/message')
+      input(type='text', name='message', placeholder='enter your message here')
+      button(type='submit') add
+
+ol

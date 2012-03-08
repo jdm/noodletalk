@@ -7,5 +7,6 @@
     , "jade": ">= 0.0.1"
     , "connect-redis": "1.2.0"
     , "request": "2.9.153"
+    , "gravatar": "1.0.6"
   }
 }
