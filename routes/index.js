@@ -2,6 +2,7 @@ var gravatar = require('gravatar');
 var request = require('request');
 
 var auth = require('../lib/authenticate');
+var content = require('../lib/web-imagery');
 
 var settings = require('../settings');
 var io = require('socket.io').listen(settings.app);
@@ -11,7 +12,7 @@ var message = {};
 var getMessage = function(req) {
   if(req.body) {
     message = {
-      message: req.body.message,
+      message: content.generate(req.body.message),
       gravatar: gravatar.url(req.session.email),
       created: Math.round(new Date().getTime() / 1000)
     };
@@ -37,8 +38,9 @@ exports.login = function(req, res) {
       });
       req.session.email = email;
     }
-    res.redirect('back');
   });
+
+  res.redirect('back');
 };
 
 

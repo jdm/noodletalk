@@ -49,14 +49,26 @@ table {
 
 /* main styles */
 
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('../fonts/BebasNeue-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
+    background-color: #bac2ac;
     padding: 20px;
     font: 16px Helvetica, Arial, sans-serif;
 }
 
 h1 {
-    font-size: 20px;
-    font-weight: bold;
+    color: #eee;
+    font-family: 'BebasNeueRegular', sans-serif;
+    font-size: 40px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-shadow: #939e7e 7px 5px 0px;
     text-transform: uppercase;
 }
 
@@ -67,8 +79,12 @@ a {
 #header, #message {
     clear: both;
     float: left;
-    margin: 5px;
     width: 100%;
+}
+
+#header a {
+    display: block;
+    float: right;
 }
 
 ol {
@@ -81,4 +97,14 @@ ol {
 ol li img {
     height: 25px;
     width: 25px;
+}
+
+form button {
+    display: none;
+}
+
+form input {
+    color: #606060;
+    font-size: 30px;
+    padding: 5px;
 }

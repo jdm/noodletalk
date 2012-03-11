@@ -4,9 +4,9 @@ $(function() {
   var updateMessage = function(data) {
     if($('li[data-created="'+ data.created +'"]').length < 1 &&
        data.created !== undefined) {
-      var msg = $('<li data-created="'+ data.created +'"><img><span></span></li>');
+      var msg = $('<li data-created="'+ data.created +'"><img><p></p></li>');
       msg.find('img').attr('src', data.gravatar);
-      msg.find('span').text(data.message);
+      msg.find('p').html(data.message);
       $('body ol').append(msg);
     }
   }
