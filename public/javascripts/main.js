@@ -8,7 +8,6 @@ $(function() {
       msg.find('img').attr('src', data.gravatar);
       msg.find('p').html(data.message);
       $('body ol').prepend(msg);
-      $('form input').val('');
     }
   };
 
@@ -42,6 +41,7 @@ $(function() {
       data: self.serialize(),
       success: function(data) {
         updateMessage(data);
+        $('form input').val('');
       },
       dataType: 'json'
     });
