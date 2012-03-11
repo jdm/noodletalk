@@ -8,7 +8,6 @@ $(function() {
       msg.find('img').attr('src', data.gravatar);
       msg.find('p').html(data.message);
       $('body ol').prepend(msg);
-      $('form input').val('');
     }
   };
 
