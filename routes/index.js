@@ -1,35 +1,34 @@
 var gravatar = require('gravatar');
 var request = require('request');
 
-var settings = require('../settings');
+var auth = require('../lib/authenticate');
 
-var authUrl = 'https://browserid.org/verify';
-var siteUrl = settings.options.domain;
+var settings = require('../settings');
+var io = require('socket.io').listen(settings.app);
+var message = {};
 
 
 // Home/main
 exports.index = function(req, res) {
-  res.render('index', { title: 'Noodle Talk' })
+  res.render('index', { title: 'Noodle Talk' });
 };
+
+
+// Ping
+exports.ping = function(req, res) {
+  res.render('ping', { title: 'Ping' });
+}
+
 
 // Login
 exports.login = function(req, res) {
-  var qs = {
-    assertion: req.body.bid_assertion,
-    audience: siteUrl
-  };
-
-  var params = {
-    url: authUrl,
-    form: true,
-    qs: qs
-  };
-
-  request.post(params, function(error, resp, body) {
-    try {
-      req.session.email = JSON.parse(body).email;
-    } catch(e) {
-      console.error('JSON failed to parse');
+  auth.verify(req, function(error, email) {
+    if(email) {
+      res.cookie('rememberme', 'yes', {
+        secure: settings.options.secureCookie,
+        httpOnly: true
+      });
+      req.session.email = email;
     }
     res.redirect('back');
   });
@@ -38,9 +37,30 @@ exports.login = function(req, res) {
 
 // Add new message
 exports.message = function(req, res) {
-  console.dir(req.body);
-  res.json({
-    message: req.body.message,
-    gravatar: gravatar.url(req.session.email)
-  });
+  res.json(getMessage(req));
 }
+
+
+// Logout
+exports.logout = function(req, res) {
+  req.session.email = null;
+  res.redirect('/');
+};
+
+
+var getMessage = function(req) {
+  if(req.body) {
+    message = {
+      message: req.body.message,
+      gravatar: gravatar.url(req.session.email),
+      created: Math.round(new Date().getTime() / 1000)
+    };
+
+    return message;
+  };
+}
+
+
+io.sockets.on('connection', function (socket) {
+  socket.broadcast.emit('message', message);
+});

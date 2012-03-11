@@ -1,3 +1,23 @@
+var socket = io.connect('http://localhost');
+
+
+var updateMessage = function(data) {
+  if($('li[data-created="'+ data.created +'"]').length < 1 &&
+     data.created !== undefined) {
+    var msg = $('<li data-created="'+ data.created +'"><img><span></span></li>');
+    msg.find('img').attr('src', data.gravatar);
+    msg.find('span').text(data.message);
+    $('body ol').append(msg);
+  }
+}
+
+var updateMessages = function() {
+  document.getElementById('ping').contentDocument.location.reload(true);
+}
+
+setInterval("updateMessages()", 3000);
+
+
 $(function() {
   $('#login').click(function() {
     navigator.id.getVerifiedEmail(function(assertion) {
@@ -17,12 +37,15 @@ $(function() {
       url: self.attr('action'),
       data: self.serialize(),
       success: function(data) {
-        var message = $('<li><img><span></span></li>');
-        message.find('img').attr('src', data.gravatar);
-        message.find('span').text(data.message);
-        $('body ol').append(message);
+        updateMessage(data);
       },
       dataType: 'json'
     });
+  });
+});
+
+socket.on('connect', function () {
+  socket.on('message', function (data) {
+    updateMessage(data);
   });
 });

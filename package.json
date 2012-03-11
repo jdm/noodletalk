@@ -1,12 +1,13 @@
 {
-    "name": "noodletalk"
-  , "version": "0.0.1"
-  , "private": true
-  , "dependencies": {
-      "express": "2.5.8"
-    , "jade": ">= 0.0.1"
-    , "connect-redis": "1.2.0"
-    , "request": "2.9.153"
-    , "gravatar": "1.0.6"
+  "name": "noodletalk",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "2.5.8",
+    "jade": ">= 0.0.1",
+    "connect-redis": "1.2.0",
+    "request": "2.9.153",
+    "gravatar": "1.0.6",
+    "socket.io": "0.9.x"
   }
 }

@@ -77,3 +77,8 @@ ol {
     float: left;
     width: 100%;
 }
+
+ol li img {
+    height: 25px;
+    width: 25px;
+}
