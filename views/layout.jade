@@ -8,7 +8,7 @@ html
     script(src='/socket.io/socket.io.js')
     script(src='/javascripts/main.js')
 
-  body
+  body(class='font#{session.userFont}')
     #header
       h1 Noodle Talk
 
@@ -16,7 +16,9 @@ html
         a(href='/logout') Log out
       else
         a(href='#', id='login') Log in with BrowserID
-        form(method='post', action='/login')
+        form(method='post', action='/login', id='login-form')
           input(type='hidden', name='bid_assertion', value='1')
 
     != body
+
+    #footer

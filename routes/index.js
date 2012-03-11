@@ -37,10 +37,10 @@ exports.login = function(req, res) {
         httpOnly: true
       });
       req.session.email = email;
+      req.session.userFont = Math.floor(Math.random() * 5);
     }
+    res.redirect('back');
   });
-
-  res.redirect('back');
 };
 
 
@@ -55,7 +55,6 @@ exports.message = function(req, res) {
 // Logout
 exports.logout = function(req, res) {
   req.session.email = null;
+  req.session.userFont = null;
   res.redirect('/');
 };
-
-

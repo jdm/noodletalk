@@ -56,6 +56,34 @@ table {
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'LeagueGothicRegular';
+    src: url('../fonts/League_Gothic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FanwoodRegular';
+    src: url('../fonts/Fanwood-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GoudyBookletter1911Regular';
+    src: url('../fonts/goudy_bookletter_1911-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CartoGothicStdBold';
+    src: url('../fonts/CartoGothicStd-Bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     background-color: #bac2ac;
     padding: 20px;
@@ -73,7 +101,9 @@ h1 {
 }
 
 a {
-    color: #00B7FF;
+    color: #2e87c6;
+    outline: none;
+    text-decoration: none;
 }
 
 #header, #message {
@@ -83,20 +113,57 @@ a {
 }
 
 #header a {
+    background-color: #cd9025;
+    box-shadow: #ddc256 5px 5px 0px;
+    color: #fff;
     display: block;
-    float: right;
+    font-family: 'BebasNeueRegular', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    padding: 15px 8px 5px 8px;
+    position: absolute;
+    right: 10px;
+    top: -10px;
 }
 
 ol {
     clear: both;
     display: block;
     float: left;
+    margin-bottom: 20px;
     width: 100%;
 }
 
-ol li img {
-    height: 25px;
-    width: 25px;
+ol li {
+    background-color: #f2f2f2;
+    clear: both;
+    float: left;
+    margin-bottom: 5px;
+    overflow: hidden;
+    padding: 5px;
+    position: relative;
+    width: 95%;
+}
+
+ol li iframe {
+    clear: both;
+    display: block;
+    float: left;
+    margin: 10px;
+}
+
+ol li > img {
+    height: 45px;
+    width: 45px;
+}
+
+ol li a.delete {
+    display: block;
+    font-family: 'BebasNeueRegular', sans-serif;
+    padding: 5px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
 }
 
 form button {
@@ -105,6 +172,32 @@ form button {
 
 form input {
     color: #606060;
-    font-size: 30px;
+    font-size: 25px;
+    margin: 10px 0px 20px 0px;
     padding: 5px;
+    width: 95%;
+}
+
+form input , ol li p {
+    font-size: 25px;
+}
+
+.font1 form input, .font1 ol li p {
+    font-family: 'LeagueGothicRegular';
+}
+
+.font2 form input, .font2 ol li p {
+    font-family: 'FanwoodRegular';
+}
+
+.font3 form input, .font3 ol li p {
+    font-family: 'CartoGothicStdBold';
+}
+
+.font4 form input, .font4 ol li p {
+    font-family: 'GoudyBookletter1911Regular';
+}
+
+#footer {
+
 }
