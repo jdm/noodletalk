@@ -1,6 +1,6 @@
 #message
   if session.email
-    form(method='post', action='/message')
+    form(method='post', action='/message', autocomplete='false')
       input(type='text', name='message', placeholder='enter your message here')
       button(type='submit') add
 
